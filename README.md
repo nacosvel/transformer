@@ -14,7 +14,6 @@ rule-driven data projection and transformation.
 <details>
     <summary>Table of Contents</summary>
     <ol>
-        <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
         <li><a href="#contributing">Contributing</a></li>
@@ -22,21 +21,6 @@ rule-driven data projection and transformation.
         <li><a href="#license">License</a></li>
     </ol>
 </details>
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-- [ ] Feature 1
-- [x] Feature 2
-    - [x] Nested Feature
-- [ ] Feature 3
-    - [ ] Nested Feature
-    - [ ] Nested Feature
-
-See the [GitHub Open Issues] for a full list of proposed features (and known issues).
-
-<p align="right">[<a href="#readme-top">back to top</a>]</p>
 
 <!-- INSTALLATION -->
 
