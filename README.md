@@ -120,11 +120,6 @@ $rule = new ConditionRule(
         return $targets;
     }
 );
-
-$response = $rule->handle(
-    ['original' => $originals, 'target' => $targets],
-    fn($context) => $context['target']
-);
 ```
 
 ```json
@@ -140,11 +135,6 @@ use Nacosvel\Transformer\DefaultValueRule;
 
 $rule = new DefaultValueRule(
     'trade_type', 'JSAPI'
-);
-
-$response = $rule->handle(
-    ['original' => $originals, 'target' => $targets],
-    fn($context) => $context['target']
 );
 ```
 
@@ -164,11 +154,6 @@ $rule = new FieldMappingRule(
     'amount',
     fn($value) => $value / 100
 );
-
-$response = $rule->handle(
-    ['original' => $originals, 'target' => $targets],
-    fn($context) => $context['target']
-);
 ```
 
 ```json
@@ -187,11 +172,6 @@ $rule = new InvokeRule(function ($originals, $targets) {
         'amount' => $originals['total_fee'] / 100,
     ];
 });
-
-$response = $rule->handle(
-    ['original' => $originals, 'target' => $targets],
-    fn($context) => $context['target']
-);
 ```
 
 ```json
@@ -208,11 +188,6 @@ use Nacosvel\Transformer\NestedMappingRule;
 $rule = new NestedMappingRule(
     'purchase_units.0.amount.currency_code',
     'application.context.0.code',
-);
-
-$response = $rule->handle(
-    ['original' => $originals, 'target' => $targets],
-    fn($context) => $context['target']
 );
 ```
 
