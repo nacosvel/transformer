@@ -34,23 +34,19 @@ class NestedMappingRule extends Rule
         return $next(['original' => $originals, 'target' => $targets]);
     }
 
-    private function updateContext(array $targets, array $path, mixed $value): mixed
+    private function updateContext(array $targets, array $path, mixed $value): array
     {
         $key = array_shift($path);
-
-        if ($key === null) {
-            return $value;
-        }
 
         if (!array_key_exists($key, $targets)) {
             $targets[$key] = [];
         }
 
-        $targets[$key] = $this->updateContext(
+        $targets[$key] = count($path) ? $this->updateContext(
             is_array($child = $targets[$key]) ? $child : [],
             $path,
             $value
-        );
+        ) : $value;
 
         return $targets;
     }
