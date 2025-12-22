@@ -18,7 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "nacosvel/pipeline": "^1.1"
+        "nacosvel/pipeline": "^1.1",
+        "nacosvel/transformer-mapper": "^1.0"
     },
     "require-dev": {
         "code-lts/doctum": "^5.0"

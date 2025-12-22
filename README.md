@@ -38,25 +38,27 @@ composer require nacosvel/transformer
 
 ### 规则类说明表
 
-| 规则                | 类型     | 作用                                  | 适用场景                                                                                      |
-|-------------------|--------|-------------------------------------|-------------------------------------------------------------------------------------------|
-| ConditionRule     | 条件规则   | 根据指定条件过滤、筛选或转换数据，仅当满足条件时执行对应的转换逻辑   | 1. 仅对特定状态（如“已支付”）的数据进行转换；<br>2. 根据字段值范围（如金额>100）调整数据展示；<br>3. 多分支条件下的差异化数据处理              |
-| DefaultValueRule  | 默认值规则  | 为字段设置预设默认值，保证数据完整性                  | 1. 未填写的用户昵称默认填充为“匿名用户”；<br>2. 接口返回的空数字字段默认设为0；<br>3. 缺失的时间字段默认填充为当前时间                     |
-| FieldMappingRule  | 字段映射规则 | 映射源字段与目标字段的名称/值对应关系，实现字段名重命名或值的静态映射 | 1. 第三方接口字段名（如user_name）映射为本地规范字段（如userName）；<br>2. 枚举值映射（如1→“男”、2→“女”）；<br>3. 多数据源字段统一命名  |
-| InvokeRule        | 调用规则   | 调用自定义方法/函数/服务对字段进行动态转换，支持复杂业务逻辑的嵌入  | 1. 对手机号进行脱敏处理（调用脱敏函数）；<br>2. 通过用户ID调用用户服务获取用户名；<br>3. 对金额字段调用汇率转换方法进行币种换算                 |
-| MetadataRule      | 源数据规则  | 基于源数据填充                             | --                                                                                        |
-| NestedMappingRule | 嵌套映射规则 | 处理嵌套结构（如对象、数组）的字段映射，支持多层级数据的转换      | 1. 嵌套对象（如user.address）的字段重命名；<br>2. 数组内元素的字段映射（如order.items中的price字段）；<br>3. 多层嵌套数据的扁平化处理 |
+| 规则                 | 类型      | 作用                                  | 适用场景                                                                                      |
+|--------------------|---------|-------------------------------------|-------------------------------------------------------------------------------------------|
+| ConditionRule      | 条件规则    | 根据指定条件过滤、筛选或转换数据，仅当满足条件时执行对应的转换逻辑   | 1. 仅对特定状态（如“已支付”）的数据进行转换；<br>2. 根据字段值范围（如金额>100）调整数据展示；<br>3. 多分支条件下的差异化数据处理              |
+| DefaultValueRule   | 默认值规则   | 为字段设置预设默认值，保证数据完整性                  | 1. 未填写的用户昵称默认填充为“匿名用户”；<br>2. 接口返回的空数字字段默认设为0；<br>3. 缺失的时间字段默认填充为当前时间                     |
+| FieldMappingRule   | 字段映射规则  | 映射源字段与目标字段的名称/值对应关系，实现字段名重命名或值的静态映射 | 1. 第三方接口字段名（如user_name）映射为本地规范字段（如userName）；<br>2. 枚举值映射（如1→“男”、2→“女”）；<br>3. 多数据源字段统一命名  |
+| InvokeRule         | 调用规则    | 调用自定义方法/函数/服务对字段进行动态转换，支持复杂业务逻辑的嵌入  | 1. 对手机号进行脱敏处理（调用脱敏函数）；<br>2. 通过用户ID调用用户服务获取用户名；<br>3. 对金额字段调用汇率转换方法进行币种换算                 |
+| MetadataRule       | 源数据规则   | 基于源数据填充                             | --                                                                                        |
+| NestedMappingRule  | 嵌套映射规则  | 处理嵌套结构（如对象、数组）的字段映射，支持多层级数据的转换      | 1. 嵌套对象（如user.address）的字段重命名；<br>2. 数组内元素的字段映射（如order.items中的price字段）；<br>3. 多层嵌套数据的扁平化处理 |
+| WildcardMapperRule | 通配符映射规则 | 处理数组结构的字段映射，支持多层级数据的转换              | 1. 数组内元素的字段映射；<br>2. 多层嵌套数据的扁平化处理                                                         |
 
 ### Rule Class Description Table
 
-| Rule Type         | Function                                                                                                                                                | Applicable Scenarios                                                                                                                                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ConditionRule     | Filter, screen or transform data according to specified conditions, and execute the corresponding transformation logic only when the conditions are met | 1. Transform data only for specific status (e.g., "Paid");<br>2. Adjust data display according to field value range (e.g., amount > 100);<br>3. Differentiated data processing under multi-branch conditions         |
-| DefaultValueRule  | Set default values for fields to ensure data integrity.                                                                                                 | 1. Default fill "Anonymous User" for unfilled user nicknames;<br>2. Default set empty numeric fields returned by the interface to 0;<br>3. Default fill missing time fields with current time                        |
-| FieldMappingRule  | Map the name/value correspondence between source fields and target fields to realize field name renaming or static mapping of values                    | 1. Map third-party interface field names (e.g., user_name) to local standard fields (e.g., userName);<br>2. Enumeration value mapping (e.g., 1→"Male", 2→"Female");<br>3. Unified naming of multi-data source fields |
-| InvokeRule        | Call custom methods/functions/services to dynamically transform fields, supporting the embedding of complex business logic                              | 1. Desensitize mobile phone numbers (call desensitization function);<br>2. Get username by calling user service via user ID;<br>3. Convert currency of amount fields by calling exchange rate conversion method      |
-| MetadataRule      | Metadata-based population                                                                                                                               | --                                                                                                                                                                                                                   |
-| NestedMappingRule | Handle field mapping of nested structures (e.g., objects, arrays) and support transformation of multi-level data                                        | 1. Field renaming of nested objects (e.g., user.address);<br>2. Field mapping of elements in arrays (e.g., price field in order.items);<br>3. Flattening of multi-level nested data                                  |
+| Rule Type          | Function                                                                                                                                                | Applicable Scenarios                                                                                                                                                                                                 |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ConditionRule      | Filter, screen or transform data according to specified conditions, and execute the corresponding transformation logic only when the conditions are met | 1. Transform data only for specific status (e.g., "Paid");<br>2. Adjust data display according to field value range (e.g., amount > 100);<br>3. Differentiated data processing under multi-branch conditions         |
+| DefaultValueRule   | Set default values for fields to ensure data integrity.                                                                                                 | 1. Default fill "Anonymous User" for unfilled user nicknames;<br>2. Default set empty numeric fields returned by the interface to 0;<br>3. Default fill missing time fields with current time                        |
+| FieldMappingRule   | Map the name/value correspondence between source fields and target fields to realize field name renaming or static mapping of values                    | 1. Map third-party interface field names (e.g., user_name) to local standard fields (e.g., userName);<br>2. Enumeration value mapping (e.g., 1→"Male", 2→"Female");<br>3. Unified naming of multi-data source fields |
+| InvokeRule         | Call custom methods/functions/services to dynamically transform fields, supporting the embedding of complex business logic                              | 1. Desensitize mobile phone numbers (call desensitization function);<br>2. Get username by calling user service via user ID;<br>3. Convert currency of amount fields by calling exchange rate conversion method      |
+| MetadataRule       | Metadata-based population                                                                                                                               | --                                                                                                                                                                                                                   |
+| NestedMappingRule  | Handle field mapping of nested structures (e.g., objects, arrays) and support transformation of multi-level data                                        | 1. Field renaming of nested objects (e.g., user.address);<br>2. Field mapping of elements in arrays (e.g., price field in order.items);<br>3. Flattening of multi-level nested data                                  |
+| WildcardMapperRule | Handles field mapping in array structures and supports multi-level data transformation.                                                                 | 1. Field mapping of elements within an array;<br>2. Flattening of multi-level nested data                                                                                                                            |
 
 ## Usage
 
@@ -95,6 +97,13 @@ $response = Converter::convert($originals, [
         'purchase_units.0.amount.currency_code',
         'payment_code',
     ),
+    $rule = new WildcardMapperRule([
+        'purchase_units_amount'  => [
+            'input'     => 'purchase_units.0.amount.value',
+            'transform' => fn($v) => $v * 100,
+        ],
+        'purchase_units_amounts' => 'purchase_units.*.amount.value',
+    ]),
 ], [
     'default_value' => '1234567890',
 ]);
@@ -104,7 +113,11 @@ $response = Converter::convert($originals, [
 {
     "default_value": "1234567890",
     "amount": 99,
-    "payment_code": "USD"
+    "payment_code": "USD",
+    "purchase_units_amount": 9900,
+    "purchase_units_amounts": [
+        99.00
+    ]
 }
 ```
 
@@ -187,19 +200,41 @@ use Nacosvel\Transformer\NestedMappingRule;
 
 $rule = new NestedMappingRule(
     'purchase_units.0.amount.currency_code',
-    'application.context.0.code',
+    'code',
 );
 ```
 
 ```json
 {
-    "application": {
-        "context": [
-            {
-                "code": "USD"
-            }
-        ]
-    }
+    "code": "USD"
+}
+```
+
+### `WildcardMapperRule::class`
+
+```php
+use Nacosvel\Transformer\WildcardMapperRule;
+
+$rule = new WildcardMapperRule([
+    'amount'  => [
+        'input'     => 'purchase_units.0.amount.value',
+        'transform' => fn($v) => $v * 100,
+    ],
+    'amounts' => 'purchase_units.*.amount.value',
+    'default' => [
+        'input'     => null,
+        'default'   => 'default value',
+    ],
+]);
+```
+
+```json
+{
+    "amount": 9900,
+    "amounts": [
+        99.00
+    ],
+    "default": "default value"
 }
 ```
 
